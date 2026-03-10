@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className="max-w-107.5 mx-auto min-h-dvh relative bg-white pb-24">
       {/* Seu conteúdo aqui */}
-      <h2>Página Teste</h2>
+      <h2>Página Home</h2>
       <BottomNav page={page} setPage={setPage} />
     </div>
   )
