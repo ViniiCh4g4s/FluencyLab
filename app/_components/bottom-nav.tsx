@@ -2,6 +2,8 @@
 
 import { usePathname, useRouter } from "next/navigation"
 import { Home, Calendar, Languages, BarChart2, User } from "lucide-react"
+import { Button } from "@/app/_components/ui/button"
+import { cn } from "@/app/_lib/utils"
 
 const items = [
   { href: "/", icon: Home, label: "Início" },
@@ -22,29 +24,29 @@ export function BottomNav() {
     >
       {items.map((item) =>
         item.center ? (
-          <button
+          <Button
             key={item.href}
             onClick={() => router.push(item.href)}
             aria-label={item.label}
-            className={[
-              "flex items-center justify-center w-14 h-14 rounded-full border-0 cursor-pointer",
-              pathname === item.href ? "shadow-[0_2px_20px_rgba(37,99,235,0.4)]" : "",
-            ].join(" ")}
-            style={{ background: "#2B54FF", color: "white" }}
+            className={cn(
+              "w-14 h-14 rounded-full bg-[#2B54FF] hover:bg-[#2B54FF]/90 text-white",
+              pathname === item.href && "shadow-[0_2px_20px_rgba(37,99,235,0.4)]",
+            )}
           >
-            <item.icon size={26} />
-          </button>
+            <item.icon className="size-6" />
+          </Button>
         ) : (
-          <button
+          <Button
             key={item.href}
+            variant="ghost"
             onClick={() => router.push(item.href)}
-            className={[
-              "flex flex-col items-center gap-0.5 px-3 py-4 rounded-xl border-0 bg-transparent cursor-pointer transition-all",
-              pathname === item.href ? "text-blue-600" : "text-slate-400",
-            ].join(" ")}
+            className={cn(
+              "flex-col h-auto px-3 py-4 rounded-xl gap-0.5 hover:bg-transparent",
+              pathname === item.href ? "text-blue-600 hover:text-blue-600" : "text-slate-400 hover:text-slate-400",
+            )}
           >
-            <item.icon size={25} />
-          </button>
+            <item.icon className="size-6" />
+          </Button>
         )
       )}
     </nav>
