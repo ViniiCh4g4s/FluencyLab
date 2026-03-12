@@ -6,15 +6,15 @@ import { Button } from "@/app/_components/ui/button"
 import { cn } from "@/app/_lib/utils"
 
 const items = [
-  { href: "/", icon: Home, label: "Início" },
-  { href: "/progress", icon: Calendar, label: "Progresso" },
-  { href: "/ranking", icon: BarChart2, label: "Ranking" },
-  { href: "/profile", icon: User, label: "Perfil" },
+    { href: "/", icon: Home, label: "Início" },
+    { href: "/progress", icon: Calendar, label: "Progresso" },
+    { href: "/ranking", icon: BarChart2, label: "Ranking" },
+    { href: "/profile", icon: User, label: "Perfil" },
 ]
 
 export function TopNav() {
-  const pathname = usePathname()
-  const router = useRouter()
+    const pathname = usePathname()
+    const router = useRouter()
 
   return (
       <>
