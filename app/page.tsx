@@ -1,4 +1,5 @@
 "use client";
+import router from "next/router";
 import { useEffect, useState } from "react";
 
 
@@ -85,7 +86,7 @@ export default function Home() {
       <div className="flex flex-col m-5">
         {/* Nível Atual */}
 
-        <div className="relative overflow-hidden rounded-2xl p-7 mb-5 bg-gradient-to-br from-blue-600 to-blue-300 shadow-xl shadow-blue-400 transition-all duration-500 delay-75 opacity-100 translate-y-0 text-white">
+        <div className="relative overflow-hidden rounded-2xl p-7 mb-1 bg-gradient-to-br from-blue-600 to-blue-300 shadow-xl shadow-blue-400 transition-all duration-500 delay-75 opacity-100 translate-y-0 text-white">
 
           <div className="absolute -top-14 -right-14 w-52 h-52 rounded-full bg-white/[0.06] pointer-events-none" />
 
@@ -136,25 +137,27 @@ export default function Home() {
 
 
 
-        {/* Conteúdo Recomendado */}
-        <div className="mt-4 flex flex-row gap-4 mt-[10%] mb-[10%] h-50 w-full">
+        {/* Estatísticas */}
 
-          <div className="bg-gray-200 p-4 rounded-lg w-[50%] flex flex-col justify-center items-center">
 
-            <div className=" bg-green-300 p-3 rounded-full mb-2">✔️</div>
+        <div className="flex flex-row gap-4 mt-[8%] mb-[5%] h-50 w-full">
 
-            <p className="text-3xl text-olive-900">20</p>
+          <div className="bg-white rounded-2xl p-5 text-center border shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-blue-200 transition-all duration-200 cursor-default w-full">
 
-            <p className="text-gray-500 text-sm m-2">Traduções</p>
+            <div className=" bg-emerald-200 p-3 rounded-full mb-2 border-emerald-100 mt-6">✅</div>
+
+            <p className="text-3xl text-emerald-500">20</p>
+
+            <p className="text-sm font-mono font-medium leading-none text-gray-500 m-2">Traduções</p>
           </div>
 
-          <div className="bg-gray-200 p-4 rounded-lg w-[50%] flex flex-col justify-center items-center">
+          <div className="bg-white rounded-2xl p-5 text-center border shadow-sm hover:-translate-y-1 hover:shadow-md hover:border-blue-200 transition-all duration-200 cursor-default w-full justify-center">
 
-            <div className=" bg-red-300 p-3 rounded-full mb-2">🔥</div>
+            <div className=" bg-red-300 p-3 rounded-full mb-2 mt-6 ">🎯</div>
 
-            <p className="text-3xl text-olive-900">70%</p>
+            <p className="text-3xl text-red-500">70%</p>
 
-            <p className="text-gray-500 text-sm m-2">Precisão</p>
+            <p className="text-sm font-mono font-medium leading-none text-gray-500 m-2">Precisão</p>
           </div>
 
         </div>
@@ -162,7 +165,7 @@ export default function Home() {
         {/* Pratica */}
 
         <div className=
-          "relative overflow-hidden bg-white rounded-2xl p-6 mb-7 flex items-center justify-between gap-5 border border-blue-100 shadow-sm transition-all duration-500 delay-200 mounted ? opacity-100 translate-y-0 opacity-0 translate-y-4">
+          "relative overflow-hidden bg-white rounded-2xl p-6 mb-7 flex items-center justify-between gap-5 border border-blue-100 shadow-sm transition-all duration-500 delay-200 mounted ? opacity-100 translate-y-0 opacity-0 translate-y-4 h-40">
 
 
           {/* left accent bar */}
@@ -179,23 +182,13 @@ export default function Home() {
                          bg-gradient-to-br from-blue-500 to-blue-800
                          shadow-md shadow-blue-400/35
                          hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-400/45
-                         active:scale-95 transition-all duration-200">
+                         active:scale-95 transition-all duration-200 " onClick={() => router.push("/practice")}>
             Ir Praticar
           </button>
 
         </div>
 
 
-
-        <div className="mt-2 bg-[#26658C] p-4 rounded-xl w-full flex flex-col justify-center items-center">
-
-          <p className="text-lg text-white p-4 text-center">O FluencyLab é um aplicativo de aprendizado de idiomas que utiliza inteligência artificial para ajudar os usuários a praticarem suas habilidades linguísticas de forma eficaz e personalizada.</p>
-
-          <button className="mt-2 bg-white text-[#0D1B2A] hover:bg-gray-200 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 py-2 px-4 rounded-md mt-3 w-full transition-colors duration-300">
-
-            Ir Praticar!
-          </button>
-        </div>
 
         {/* ranking top3 */}
 
