@@ -5,6 +5,7 @@ import { BarChart2, Calendar, Home, Languages, User } from "lucide-react"
 import { Button } from "@/app/_components/ui/button"
 import { cn } from "@/app/_lib/utils"
 
+
 const items = [
     { href: "/", icon: Home, label: "Início" },
     { href: "/progress", icon: Calendar, label: "Progresso" },
@@ -15,6 +16,8 @@ const items = [
 export function TopNav() {
     const pathname = usePathname()
     const router = useRouter()
+
+    if (pathname === "/login" || pathname === "/register") return null  // ← adiciona essa linha
 
   return (
       <>
