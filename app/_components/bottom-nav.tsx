@@ -16,6 +16,7 @@ const items = [
 export function BottomNav() {
   const pathname = usePathname()
   const router = useRouter()
+  if (pathname === "/login" || pathname === "/register") return null  // ← adiciona essa linha
 
   return (
     <nav
