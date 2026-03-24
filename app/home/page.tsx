@@ -2,6 +2,9 @@
 import router from "next/router";
 import { useEffect, useState } from "react";
 
+import { StatsCards } from "@/app/_components/progress/stats-cards";
+import { FAKE_STATS, computeStats } from "@/app/_lib/progress"
+
 
 const user = {
   name: "Marcus Vinicius",
@@ -63,6 +66,7 @@ function useMounted() {
 
 
 export default function Home() {
+  const stats = computeStats(FAKE_STATS)
 
   return (
 
@@ -291,63 +295,13 @@ export default function Home() {
         </div>
 
         {/* Estatísticas */}
-        <div className="flex flex-row gap-4 mt-[8%] mb-[5%] w-full">
 
-          {/* card traduções */}
-          <a href="/progress" className="group bg-white rounded-2xl p-5 text-center border shadow-sm
-                  hover:-translate-y-1 hover:shadow-md hover:border-emerald-200
-                  hover:bg-emerald-50/40 transition-all duration-300 cursor-default w-full">
-
-            <div className="bg-emerald-100 p-3 rounded-full mb-3 mt-4 w-fit mx-auto
-                    group-hover:bg-emerald-200 transition-all duration-300"
-              style={{ animation: "iconFloat 3s ease-in-out infinite" }}>
-              ✅
-            </div>
-
-            <p className="text-3xl font-bold text-emerald-500 tabular-nums"
-              style={{ animation: "countUp 1.4s ease-out forwards" }}>
-              20
-            </p>
-
-            <p className="text-sm font-mono font-medium text-gray-400 mt-2">Traduções</p>
-          </a>
-
-          {/* card precisão */}
-          <a href="/progress" className="group bg-white rounded-2xl p-5 text-center border shadow-sm
-                  hover:-translate-y-1 hover:shadow-md hover:border-red-200
-                  hover:bg-red-50/40 transition-all duration-300 cursor-default w-full">
-
-            <div className="bg-red-100 p-3 rounded-full mb-3 mt-4 w-fit mx-auto
-                    group-hover:bg-red-200 transition-all duration-300"
-              style={{ animation: "iconFloat 3s 0.4s ease-in-out infinite" }}>
-              🎯
-            </div>
-
-            <p className="text-3xl font-bold text-red-500 tabular-nums"
-              style={{ animation: "countUp 1.4s 0.2s ease-out forwards" }}>
-              70%
-            </p>
-
-            <p className="text-sm font-mono font-medium text-gray-400 mt-2">Precisão</p>
-          </a>
-
-          <style>{`
-    @keyframes countUp {
-      0%   { opacity: 0; transform: scale(0.4) translateY(10px); }
-      60%  { transform: scale(1.2) translateY(-4px);              }
-      80%  { transform: scale(0.95);                              }
-      100% { opacity: 1; transform: scale(1) translateY(0);      }
-    }
-
-    @keyframes iconFloat {
-      0%   { transform: translateY(0)    scale(1);    }
-      30%  { transform: translateY(-5px) scale(1.08); }
-      60%  { transform: translateY(-3px) scale(1.04); }
-      100% { transform: translateY(0)    scale(1);    }
-    }
-  `}</style>
+        <div className="  mt-[8%] mb-[5%] w-full">
+          <a href="/progress" className="cursor-default"> <StatsCards stats={stats} limit={2} /> </a>
 
         </div>
+
+
 
         {/* Pratica */}
         <div className="relative overflow-hidden bg-white rounded-2xl border border-blue-100 shadow-sm
@@ -398,85 +352,95 @@ export default function Home() {
 
         </div>
         {/* ranking top3 */}
-        <div className="mt-7 duration-500 delay-300 opacity-100 translate-y-0">
-          {/* header */}
+        <div className="mt-7">
           <div className="flex items-center justify-between mb-3.5">
-            <h2 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
-              🏆 Ranking Top 3
-            </h2>
+            <h2 className="text-xl font-bold text-slate-900">Ranking Top 3</h2>
             <a href="/ranking" className="text-xs font-bold text-blue-500 hover:text-blue-700 transition-colors">
               Ver todos →
             </a>
           </div>
 
-          {/* lista */}
-          <div className="flex flex-col gap-2.5">
+          <style>{`
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-16px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes xpGrow {
+      from { opacity: 0; transform: scale(0.7); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .rank-row-1 { animation: slideIn 0.4s 0.1s ease both; }
+    .rank-row-2 { animation: slideIn 0.4s 0.2s ease both; }
+    .rank-row-3 { animation: slideIn 0.4s 0.3s ease both; }
+    .xp-badge   { animation: xpGrow  0.4s 0.5s ease both; }
+  `}</style>
 
-            {/* 1º lugar - ouro */}
-            <div className="flex items-center gap-3.5 bg-amber-50 rounded-2xl px-5 py-4
-                    border border-amber-300/40 shadow-sm
-                    hover:translate-x-1.5 hover:shadow-md transition-all duration-200">
-              <span className="font-mono text-base font-semibold w-6 text-center text-amber-500">1</span>
-              <div className="w-10 h-10 rounded-full flex items-center justify-center
-                      text-sm font-bold text-white flex-shrink-0
-                      bg-gradient-to-br from-blue-600 to-blue-800">
-                <img src="https://github.com/leerob.png" alt="Lucas M." className=" rounded-full" />
+          <div className="flex flex-col divide-y divide-slate-100 bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+
+            {/* 1º lugar */}
+            <div className="rank-row-1 group flex items-center gap-3 px-4 py-3.5
+                    hover:bg-amber-50/50 transition-colors duration-200 cursor-pointer">
+              <span className="w-6 text-sm font-bold text-amber-400 text-center
+                       group-hover:scale-125 transition-transform duration-200">1</span>
+              <div className="relative">
+                <img src="https://github.com/leerob.png"
+                  className="w-9 h-9 rounded-full object-cover ring-2 ring-amber-200
+                        group-hover:ring-amber-400 group-hover:scale-105 transition-all duration-200" />
+                <span className="absolute -bottom-0.5 -right-0.5 text-[10px] leading-none">🥇</span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-bold text-slate-900 mb-1.5">Lusca M.</p>
-                <div className="flex items-center gap-2">
-                  <div className="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                    <div className="h-full w-full rounded-full bg-gradient-to-r from-amber-400 to-orange-400" />
-                  </div>
-                  <span className="text-[0.68rem] text-slate-400 font-mono whitespace-nowrap">9.820 XP</span>
-                </div>
+                <p className="text-sm font-semibold text-slate-800 truncate">Lucas M.</p>
+                <p className="text-xs text-slate-400">Nível 5</p>
               </div>
+              <span className="xp-badge text-xs font-bold text-amber-500 font-mono bg-amber-50
+                       px-2 py-0.5 rounded-full border border-amber-100">
+                9.820 XP
+              </span>
             </div>
 
-            {/* 2º lugar - prata */}
-            <div className="flex items-center gap-3.5 bg-white rounded-2xl px-5 py-4
-                    border border-slate-300/40 shadow-sm
-                    hover:translate-x-1.5 hover:shadow-md transition-all duration-200">
-              <span className="font-mono text-base font-semibold w-6 text-center text-slate-400">2</span>
-              <div className="w-10 h-10 rounded-full flex items-center justify-center
-                      text-sm font-bold text-white flex-shrink-0
-                      bg-gradient-to-br from-emerald-500 to-cyan-600">
-                <img src="https://github.com/rauchg.png" alt="Carlos J." className=" rounded-full" />
+            {/* 2º lugar */}
+            <div className="rank-row-2 group flex items-center gap-3 px-4 py-3.5
+                    hover:bg-slate-50 transition-colors duration-200 cursor-pointer">
+              <span className="w-6 text-sm font-bold text-slate-400 text-center
+                       group-hover:scale-125 transition-transform duration-200">2</span>
+              <div className="relative">
+                <img src="https://github.com/rauchg.png"
+                  className="w-9 h-9 rounded-full object-cover ring-2 ring-slate-200
+                        group-hover:ring-slate-400 group-hover:scale-105 transition-all duration-200" />
+                <span className="absolute -bottom-0.5 -right-0.5 text-[10px] leading-none">🥈</span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-bold text-slate-900 mb-1.5">Carlos J.</p>
-                <div className="flex items-center gap-2">
-                  <div className="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                    <div className="h-full w-[90%] rounded-full bg-gradient-to-r from-slate-400 to-slate-500" />
-                  </div>
-                  <span className="text-[0.68rem] text-slate-400 font-mono whitespace-nowrap">9.350 XP</span>
-                </div>
+                <p className="text-sm font-semibold text-slate-800 truncate">Carlos J.</p>
+                <p className="text-xs text-slate-400">Nível 4</p>
               </div>
+              <span className="xp-badge text-xs font-bold text-slate-500 font-mono bg-slate-50
+                       px-2 py-0.5 rounded-full border border-slate-100">
+                9.350 XP
+              </span>
             </div>
 
-            {/* 3º lugar - bronze */}
-            <div className="flex items-center gap-3.5 bg-white rounded-2xl px-5 py-4
-                    border border-orange-300/40 shadow-sm
-                    hover:translate-x-1.5 hover:shadow-md transition-all duration-200">
-              <span className="font-mono text-base font-semibold w-6 text-center text-orange-700">3</span>
-              <div className="w-10 h-10 rounded-full flex items-center justify-center
-                      text-sm font-bold text-white flex-shrink-0
-                      bg-gradient-to-br from-orange-500 to-red-500">
-                <img src="https://github.com/timneutkens.png" alt="Pedro H." className=" rounded-full" />
+            {/* 3º lugar */}
+            <div className="rank-row-3 group flex items-center gap-3 px-4 py-3.5
+                    hover:bg-orange-50/50 transition-colors duration-200 cursor-pointer">
+              <span className="w-6 text-sm font-bold text-orange-600 text-center
+                       group-hover:scale-125 transition-transform duration-200">3</span>
+              <div className="relative">
+                <img src="https://github.com/timneutkens.png"
+                  className="w-9 h-9 rounded-full object-cover ring-2 ring-orange-200
+                        group-hover:ring-orange-400 group-hover:scale-105 transition-all duration-200" />
+                <span className="absolute -bottom-0.5 -right-0.5 text-[10px] leading-none">🥉</span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-bold text-slate-900 mb-1.5">Pedro H.</p>
-                <div className="flex items-center gap-2">
-                  <div className="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                    <div className="h-full w-[80%] rounded-full bg-gradient-to-r from-orange-700 to-orange-500" />
-                  </div>
-                  <span className="text-[0.68rem] text-slate-400 font-mono whitespace-nowrap">8.980 XP</span>
-                </div>
+                <p className="text-sm font-semibold text-slate-800 truncate">Pedro H.</p>
+                <p className="text-xs text-slate-400">Nível 4</p>
               </div>
+              <span className="xp-badge text-xs font-bold text-orange-600 font-mono bg-orange-50
+                       px-2 py-0.5 rounded-full border border-orange-100">
+                8.980 XP
+              </span>
             </div>
 
           </div>
-
         </div>
 
       </div>
