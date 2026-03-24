@@ -5,6 +5,7 @@ import { cn } from "@/app/_lib/utils"
 type Props = {
     // Estatísticas já computadas por computeStats()
     stats: ComputedStats
+    limit?: number
 }
 
 // Configuração de cada card — ícone, cor, valor derivado e rótulo
@@ -49,9 +50,10 @@ function buildCards(stats: ComputedStats): CardConfig[] {
     ]
 }
 
-export function StatsCards({ stats }: Props) {
+export function StatsCards({ stats, limit }: Props) {
     // Constrói a lista de cards com os valores já formatados
-    const cards = buildCards(stats)
+
+     const cards = limit ? buildCards(stats).slice(0, limit) : buildCards(stats)
 
     return (
         <div className="grid grid-cols-2 gap-3">

@@ -2,6 +2,7 @@
 import { Avatar, AvatarFallback, AvatarImage, AvatarBadge } from "@/app/_components/ui/avatar"
 import { useEffect, useRef, useState } from "react";
 
+
 export default function ProfilePage() {
   const xpFillRef = useRef<HTMLDivElement>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
