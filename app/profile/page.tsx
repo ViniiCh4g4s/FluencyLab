@@ -8,7 +8,7 @@ export default function ProfilePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [form, setForm] = useState({
-    nome: "Marcus Vinicius",
+    nome: "samuel",
     email: "",
     telefone: "",
     senhaAtual: "",
