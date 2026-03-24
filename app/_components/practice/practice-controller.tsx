@@ -41,6 +41,12 @@ export function PracticeController({ phrases }: Props) {
     const [showXpToast, setShowXpToast] = useState(false)
     // Quantidade de XP exibida no toast após verificar
     const [earnedXp, setEarnedXp] = useState(0)
+    // Modo convidado — lido do localStorage na inicialização
+    const [isGuest] = useState(() => {
+        if (typeof window === "undefined") return false
+        return localStorage.getItem("fluency-lab:mode") === "guest"
+    })
+
     // Lista de ids de frases favoritadas pelo usuário — inicializada do localStorage
     const [favorites, setFavorites] = useState<number[]>(() => {
         if (typeof window === "undefined") return []
@@ -119,6 +125,7 @@ export function PracticeController({ phrases }: Props) {
                 isFav={isFav}
                 justFavorited={justFavorited}
                 onToggleFavorite={() => toggleFavorite(phrase.id)}
+                showFavorite={!isGuest}
             />
 
             <PhraseCard phrase={phrase} />

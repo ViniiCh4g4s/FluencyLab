@@ -104,7 +104,10 @@ export function LoginForm() {
                     {/* Submit */}
                     <div className={`mt-2 ${fadeUp(200)}`}>
                         <button
-                            onClick={() => router.push("/home")}
+                            onClick={() => {
+                                localStorage.removeItem("fluency-lab:mode")
+                                router.push("/home")
+                            }}
                             type="button"
                             className="relative h-12 w-full overflow-hidden rounded-xl bg-gradient-to-br from-blue-500 to-blue-800 text-sm font-bold text-white shadow-md shadow-blue-400/35 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-400/45 active:scale-[0.98]"
                         >
