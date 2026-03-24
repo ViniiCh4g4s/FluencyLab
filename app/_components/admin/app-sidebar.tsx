@@ -1,8 +1,8 @@
 "use client"
 
-import { NavFooter } from '@/app/_components/admin/nav-footer';
-import { NavMain } from '@/app/_components/admin/nav-main';
-import { NavUser } from '@/app/_components/admin/nav-user';
+import { NavFooter } from "@/app/_components/admin/nav-footer"
+import { NavMain } from "@/app/_components/admin/nav-main"
+import { NavUser } from "@/app/_components/admin/nav-user"
 import {
     Sidebar,
     SidebarContent,
@@ -11,28 +11,22 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-} from '@/app/_components/ui/sidebar';
-import { type NavItem } from '@/app/_lib/utils';
-import Link from 'next/link';
-import {
-    LayoutGrid,
-    MessageSquare,
-    Settings2,
-    Trophy,
-    Users,
-} from 'lucide-react';
-import AppLogo from './app-logo';
+} from "@/app/_components/ui/sidebar"
+import { type NavItem } from "@/app/_lib/utils"
+import Link from "next/link"
+import { LayoutGrid, MessageSquare, Settings2, Trophy, Users } from "lucide-react"
+import AppLogo from "./app-logo"
 
 // Itens principais da plataforma
 const mainNavItems: NavItem[] = [
-    { title: 'Dashboard',  href: '/admin/dashboard',     icon: LayoutGrid  },
-    { title: 'Usuários',   href: '/admin/usuarios',      icon: Users       },
-    { title: 'Frases',     href: '/admin/frases',        icon: MessageSquare },
+    { title: "Dashboard", href: "/admin/dashboard", icon: LayoutGrid },
+    { title: "Usuários", href: "/admin/usuarios", icon: Users },
+    { title: "Frases", href: "/admin/frases", icon: MessageSquare },
 ]
 
 // Item de configurações no rodapé
 const footerNavItems: NavItem[] = [
-    { title: 'Configurações', href: '/admin/configuracoes', icon: Settings2 },
+    { title: "Configurações", href: "/admin/configuracoes", icon: Settings2 },
 ]
 
 export function AppSidebar() {
@@ -59,5 +53,5 @@ export function AppSidebar() {
                 <NavUser />
             </SidebarFooter>
         </Sidebar>
-    );
+    )
 }

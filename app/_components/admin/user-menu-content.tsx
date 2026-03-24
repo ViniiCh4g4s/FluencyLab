@@ -5,19 +5,19 @@ import {
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
-} from '@/app/_components/ui/dropdown-menu';
-import { UserInfo } from '@/app/_components/admin/user-info';
-import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
-import { type User } from '@/app/_lib/utils';
-import Link from 'next/link';
-import { Bell, LogOut, Settings, UserIcon } from 'lucide-react';
+} from "@/app/_components/ui/dropdown-menu"
+import { UserInfo } from "@/app/_components/admin/user-info"
+import { useMobileNavigation } from "@/hooks/use-mobile-navigation"
+import { type User } from "@/app/_lib/utils"
+import Link from "next/link"
+import { Bell, LogOut, Settings, UserIcon } from "lucide-react"
 
 interface UserMenuContentProps {
-    user: User;
+    user: User
 }
 
 export function UserMenuContent({ user }: UserMenuContentProps) {
-    const cleanup = useMobileNavigation();
+    const cleanup = useMobileNavigation()
 
     return (
         <>
@@ -29,21 +29,13 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
                 <DropdownMenuItem asChild>
-                    <Link
-                        className="block w-full"
-                        href="/admin/profile"
-                        onClick={cleanup}
-                    >
+                    <Link className="block w-full" href="/admin/profile" onClick={cleanup}>
                         <UserIcon className="mr-2" />
                         Perfil
                     </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                    <Link
-                        className="block w-full"
-                        href="/admin/notificacoes"
-                        onClick={cleanup}
-                    >
+                    <Link className="block w-full" href="/admin/notificacoes" onClick={cleanup}>
                         <Bell className="mr-2" />
                         Notificações
                     </Link>
@@ -51,15 +43,11 @@ export function UserMenuContent({ user }: UserMenuContentProps) {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-                <Link
-                    className="block w-full"
-                    href="/logout"
-                    data-test="logout-button"
-                >
+                <Link className="block w-full" href="/logout" data-test="logout-button">
                     <LogOut className="mr-2" />
                     Sair
                 </Link>
             </DropdownMenuItem>
         </>
-    );
+    )
 }

@@ -22,7 +22,7 @@ export function AnswerForm({ answer, onChange, onVerify, onSkip, inputRef }: Pro
             {/* Textarea controlado; Enter sem Shift aciona a verificação */}
             <textarea
                 ref={inputRef}
-                className="w-full border-2 border-slate-200 rounded-2xl px-5 py-4 text-base text-slate-800 bg-white outline-none resize-none min-h-20 focus:border-blue-500 placeholder:text-slate-400 transition-colors"
+                className="min-h-20 w-full resize-none rounded-2xl border-2 border-slate-200 bg-white px-5 py-4 text-base text-slate-800 transition-colors outline-none placeholder:text-slate-400 focus:border-blue-500"
                 placeholder="Digite a tradução em inglês..."
                 value={answer}
                 onChange={(e) => onChange(e.target.value)}
@@ -33,12 +33,12 @@ export function AnswerForm({ answer, onChange, onVerify, onSkip, inputRef }: Pro
                     }
                 }}
             />
-            <div className="flex flex-col gap-2.5 mt-4">
+            <div className="mt-4 flex flex-col gap-2.5">
                 {/* Botão principal desabilitado enquanto o campo estiver vazio */}
                 <Button
                     onClick={onVerify}
                     disabled={!answer.trim()}
-                    className="w-full h-auto py-4 rounded-2xl text-base font-semibold bg-blue-600 hover:bg-blue-700 shadow-[0_4px_16px_rgba(37,99,235,0.3)] active:scale-[0.98] disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
+                    className="h-auto w-full rounded-2xl bg-blue-600 py-4 text-base font-semibold shadow-[0_4px_16px_rgba(37,99,235,0.3)] hover:bg-blue-700 active:scale-[0.98] disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
                 >
                     Verificar Tradução
                 </Button>
@@ -46,7 +46,7 @@ export function AnswerForm({ answer, onChange, onVerify, onSkip, inputRef }: Pro
                 <Button
                     variant="outline"
                     onClick={onSkip}
-                    className="w-full h-auto py-3.5 rounded-2xl text-sm font-medium text-slate-500 border-[1.5px] border-slate-200 bg-transparent hover:bg-transparent hover:text-slate-500"
+                    className="h-auto w-full rounded-2xl border-[1.5px] border-slate-200 bg-transparent py-3.5 text-sm font-medium text-slate-500 hover:bg-transparent hover:text-slate-500"
                 >
                     Pular frase
                 </Button>

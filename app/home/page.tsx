@@ -19,12 +19,10 @@ export default function HomePage() {
 
     return (
         <NavLayout>
-            <div className="mx-auto min-h-dvh relative bg-white pb-24 px-4 sm:px-6 lg:px-8">
-
+            <div className="page-enter relative mx-auto min-h-dvh max-w-5xl bg-white px-4 pb-24 sm:px-6 lg:px-8">
                 <WelcomeHeader name={USER.name} />
 
-                <div className="flex flex-col m-5">
-
+                <div className="m-5 flex flex-col">
                     <LevelCard
                         level={USER.level}
                         xp={USER.xp}
@@ -39,14 +37,9 @@ export default function HomePage() {
                         </a>
                     </div>
 
-                    <PracticeCard
-                        xp={USER.xp}
-                        xpNeeded={USER.xpNeeded}
-                        level={USER.level}
-                    />
+                    <PracticeCard xp={USER.xp} xpNeeded={USER.xpNeeded} level={USER.level} />
 
                     <RankingTop3 />
-
                 </div>
             </div>
         </NavLayout>

@@ -1,8 +1,4 @@
 // Layout exclusivo para páginas de autenticação — sem TopNav nem BottomNav
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
-    return (
-        <div className="min-h-dvh bg-white flex flex-col">
-            {children}
-        </div>
-    )
+    return <div className="flex min-h-dvh flex-col bg-white">{children}</div>
 }

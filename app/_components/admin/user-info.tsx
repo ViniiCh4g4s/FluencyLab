@@ -1,15 +1,9 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/app/_components/ui/avatar';
-import { useInitials } from '@/hooks/use-initials';
-import { type User } from '@/app/_lib/utils';
+import { Avatar, AvatarFallback, AvatarImage } from "@/app/_components/ui/avatar"
+import { useInitials } from "@/hooks/use-initials"
+import { type User } from "@/app/_lib/utils"
 
-export function UserInfo({
-                             user,
-                             showEmail = false,
-                         }: {
-    user: User;
-    showEmail?: boolean;
-}) {
-    const getInitials = useInitials();
+export function UserInfo({ user, showEmail = false }: { user: User; showEmail?: boolean }) {
+    const getInitials = useInitials()
 
     return (
         <>
@@ -17,7 +11,7 @@ export function UserInfo({
                 <AvatarImage
                     src={
                         user.avatar
-                            ? user.avatar.startsWith('http')
+                            ? user.avatar.startsWith("http")
                                 ? user.avatar
                                 : `/storage/${user.avatar}`
                             : undefined
@@ -31,11 +25,9 @@ export function UserInfo({
             <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user.name}</span>
                 {showEmail && (
-                    <span className="truncate text-xs text-muted-foreground">
-                        {user.email}
-                    </span>
+                    <span className="text-muted-foreground truncate text-xs">{user.email}</span>
                 )}
             </div>
         </>
-    );
+    )
 }

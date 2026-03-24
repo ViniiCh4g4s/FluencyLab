@@ -3,8 +3,11 @@
 import { useState, useRef, useEffect } from "react"
 import { Mail, ArrowLeft, CheckCircle2 } from "lucide-react"
 import {
-    Dialog, DialogContent, DialogHeader,
-    DialogTitle, DialogDescription,
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogDescription,
 } from "@/app/_components/ui/dialog"
 import { LockIcon, EyeIcon, EyeOffIcon } from "./auth-icons"
 
@@ -54,7 +57,8 @@ export function ForgotPasswordDialog({ open, onClose, initialEmail = "" }: Props
             focused === name ? "border-blue-400 shadow-sm shadow-blue-100" : "border-transparent"
         }`
 
-    const btnClass = "w-full h-11 rounded-xl text-sm font-bold text-white bg-gradient-to-br from-blue-500 to-blue-800 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 shadow-md shadow-blue-400/30"
+    const btnClass =
+        "w-full h-11 rounded-xl text-sm font-bold text-white bg-gradient-to-br from-blue-500 to-blue-800 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 shadow-md shadow-blue-400/30"
 
     // ── Handlers de código OTP ──────────────────────────────────
     function handleCodeChange(i: number, val: string) {
@@ -76,14 +80,19 @@ export function ForgotPasswordDialog({ open, onClose, initialEmail = "" }: Props
         if (!pasted.length) return
         e.preventDefault()
         const next = [...code]
-        pasted.split("").forEach((char, i) => { next[i] = char })
+        pasted.split("").forEach((char, i) => {
+            next[i] = char
+        })
         setCode(next)
         codeRefs.current[Math.min(pasted.length, 5)]?.focus()
     }
 
     // ── Submit handlers ─────────────────────────────────────────
     function submitEmail() {
-        if (!email) { setError("Digite seu e-mail."); return }
+        if (!email) {
+            setError("Digite seu e-mail.")
+            return
+        }
         setError("")
         // TODO: API — enviar código
         setStep("code")
@@ -91,15 +100,24 @@ export function ForgotPasswordDialog({ open, onClose, initialEmail = "" }: Props
     }
 
     function submitCode() {
-        if (code.join("").length < 6) { setError("Digite o código completo."); return }
+        if (code.join("").length < 6) {
+            setError("Digite o código completo.")
+            return
+        }
         setError("")
         // TODO: API — validar código
         setStep("password")
     }
 
     function submitPassword() {
-        if (newPassword.length < 8) { setError("A senha deve ter pelo menos 8 caracteres."); return }
-        if (newPassword !== confirmPassword) { setError("As senhas não coincidem."); return }
+        if (newPassword.length < 8) {
+            setError("A senha deve ter pelo menos 8 caracteres.")
+            return
+        }
+        if (newPassword !== confirmPassword) {
+            setError("As senhas não coincidem.")
+            return
+        }
         setError("")
         // TODO: API — atualizar senha
         setStep("done")
@@ -108,7 +126,6 @@ export function ForgotPasswordDialog({ open, onClose, initialEmail = "" }: Props
     return (
         <Dialog open={open} onOpenChange={(v) => !v && onClose()}>
             <DialogContent className="max-w-sm">
-
                 {/* ── Etapa 1: e-mail ───────────────────────────── */}
                 {step === "email" && (
                     <>
@@ -157,23 +174,28 @@ export function ForgotPasswordDialog({ open, onClose, initialEmail = "" }: Props
 
                         <div className="mt-2 flex flex-col gap-4">
                             {/* Inputs OTP */}
-                            <div className="flex items-center justify-center gap-2" onPaste={handleCodePaste}>
+                            <div
+                                className="flex items-center justify-center gap-2"
+                                onPaste={handleCodePaste}
+                            >
                                 {code.map((digit, i) => (
                                     <input
                                         key={i}
-                                        ref={(el) => { codeRefs.current[i] = el }}
+                                        ref={(el) => {
+                                            codeRefs.current[i] = el
+                                        }}
                                         type="text"
                                         inputMode="numeric"
                                         maxLength={1}
                                         value={digit}
                                         onChange={(e) => handleCodeChange(i, e.target.value)}
                                         onKeyDown={(e) => handleCodeKeyDown(i, e)}
-                                        className="w-11 h-12 rounded-xl border-2 text-center text-lg font-bold text-slate-800 outline-none transition-all duration-150 bg-[#f0f4ff] border-transparent focus:border-blue-400 focus:shadow-sm focus:shadow-blue-100"
+                                        className="h-12 w-11 rounded-xl border-2 border-transparent bg-[#f0f4ff] text-center text-lg font-bold text-slate-800 transition-all duration-150 outline-none focus:border-blue-400 focus:shadow-sm focus:shadow-blue-100"
                                     />
                                 ))}
                             </div>
 
-                            {error && <p className="text-xs text-red-500 text-center">{error}</p>}
+                            {error && <p className="text-center text-xs text-red-500">{error}</p>}
 
                             <button onClick={submitCode} className={btnClass}>
                                 Verificar código
@@ -181,14 +203,18 @@ export function ForgotPasswordDialog({ open, onClose, initialEmail = "" }: Props
 
                             <div className="flex items-center justify-between text-xs text-slate-400">
                                 <button
-                                    onClick={() => { setStep("email"); setCode(["", "", "", "", "", ""]); setError("") }}
-                                    className="flex items-center gap-1 hover:text-slate-600 transition-colors"
+                                    onClick={() => {
+                                        setStep("email")
+                                        setCode(["", "", "", "", "", ""])
+                                        setError("")
+                                    }}
+                                    className="flex items-center gap-1 transition-colors hover:text-slate-600"
                                 >
                                     <ArrowLeft size={12} /> Trocar e-mail
                                 </button>
                                 <button
                                     onClick={submitEmail}
-                                    className="text-blue-500 font-semibold hover:text-blue-700 transition-colors"
+                                    className="font-semibold text-blue-500 transition-colors hover:text-blue-700"
                                 >
                                     Reenviar código
                                 </button>
@@ -219,8 +245,12 @@ export function ForgotPasswordDialog({ open, onClose, initialEmail = "" }: Props
                                     placeholder="Nova senha"
                                     className="flex-1 bg-transparent text-sm text-slate-800 placeholder-slate-400 outline-none"
                                 />
-                                <button type="button" onClick={() => setShowPass(!showPass)}
-                                    className="text-slate-400 hover:text-blue-500 transition-colors" tabIndex={-1}>
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPass(!showPass)}
+                                    className="text-slate-400 transition-colors hover:text-blue-500"
+                                    tabIndex={-1}
+                                >
                                     {showPass ? <EyeOffIcon /> : <EyeIcon />}
                                 </button>
                             </div>
@@ -236,8 +266,12 @@ export function ForgotPasswordDialog({ open, onClose, initialEmail = "" }: Props
                                     placeholder="Confirmar nova senha"
                                     className="flex-1 bg-transparent text-sm text-slate-800 placeholder-slate-400 outline-none"
                                 />
-                                <button type="button" onClick={() => setShowConfirm(!showConfirm)}
-                                    className="text-slate-400 hover:text-blue-500 transition-colors" tabIndex={-1}>
+                                <button
+                                    type="button"
+                                    onClick={() => setShowConfirm(!showConfirm)}
+                                    className="text-slate-400 transition-colors hover:text-blue-500"
+                                    tabIndex={-1}
+                                >
                                     {showConfirm ? <EyeOffIcon /> : <EyeIcon />}
                                 </button>
                             </div>
@@ -253,14 +287,17 @@ export function ForgotPasswordDialog({ open, onClose, initialEmail = "" }: Props
 
                 {/* ── Etapa 4: concluído ────────────────────────── */}
                 {step === "done" && (
-                    <div className="flex flex-col items-center text-center gap-4 py-2">
-                        <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center">
+                    <div className="flex flex-col items-center gap-4 py-2 text-center">
+                        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50">
                             <CheckCircle2 className="text-emerald-500" size={32} />
                         </div>
                         <div>
-                            <h3 className="text-lg font-extrabold text-slate-900 mb-1">Senha alterada!</h3>
-                            <p className="text-sm text-slate-400 leading-relaxed">
-                                Sua senha foi redefinida com sucesso.<br />
+                            <h3 className="mb-1 text-lg font-extrabold text-slate-900">
+                                Senha alterada!
+                            </h3>
+                            <p className="text-sm leading-relaxed text-slate-400">
+                                Sua senha foi redefinida com sucesso.
+                                <br />
                                 Faça login com sua nova senha.
                             </p>
                         </div>
@@ -269,7 +306,6 @@ export function ForgotPasswordDialog({ open, onClose, initialEmail = "" }: Props
                         </button>
                     </div>
                 )}
-
             </DialogContent>
         </Dialog>
     )

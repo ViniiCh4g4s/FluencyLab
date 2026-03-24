@@ -38,17 +38,17 @@ export function LoginForm() {
                 initialEmail={email}
             />
 
-            <div className={`m-7 relative z-10 w-full max-w-md bg-white rounded-3xl border border-blue-100 shadow-xl shadow-blue-100/40 px-8 py-10 ${fadeUp()}`}>
-
+            <div
+                className={`relative z-10 m-7 w-full max-w-md rounded-3xl border border-blue-100 bg-white px-8 py-10 shadow-xl shadow-blue-100/40 ${fadeUp()}`}
+            >
                 <div className={fadeUp(75)}>
                     <AuthLogo />
                 </div>
 
                 <div className="flex flex-col gap-4">
-
                     {/* E-mail */}
                     <div className={fadeUp(100)}>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">
+                        <label className="mb-2 block text-xs font-semibold tracking-wider text-slate-400 uppercase">
                             E-mail
                         </label>
                         <div className={fieldClass("email")}>
@@ -60,21 +60,21 @@ export function LoginForm() {
                                 onFocus={() => setFocused("email")}
                                 onBlur={() => setFocused(null)}
                                 placeholder="seu@email.com"
-                                className="flex-1 bg-transparent text-sm text-slate-800 placeholder-slate-400 outline-none font-medium"
+                                className="flex-1 bg-transparent text-sm font-medium text-slate-800 placeholder-slate-400 outline-none"
                             />
                         </div>
                     </div>
 
                     {/* Senha */}
                     <div className={fadeUp(150)}>
-                        <div className="flex items-center justify-between mb-2">
-                            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400">
+                        <div className="mb-2 flex items-center justify-between">
+                            <label className="block text-xs font-semibold tracking-wider text-slate-400 uppercase">
                                 Senha
                             </label>
                             <button
                                 type="button"
                                 onClick={() => setForgotOpen(true)}
-                                className="text-xs font-semibold text-blue-500 hover:text-blue-700 transition-colors"
+                                className="text-xs font-semibold text-blue-500 transition-colors hover:text-blue-700"
                             >
                                 Esqueceu a senha?
                             </button>
@@ -88,12 +88,12 @@ export function LoginForm() {
                                 onFocus={() => setFocused("password")}
                                 onBlur={() => setFocused(null)}
                                 placeholder="••••••••"
-                                className="flex-1 bg-transparent text-sm text-slate-800 placeholder-slate-400 outline-none font-medium"
+                                className="flex-1 bg-transparent text-sm font-medium text-slate-800 placeholder-slate-400 outline-none"
                             />
                             <button
                                 type="button"
                                 onClick={() => setShowPass(!showPass)}
-                                className="text-slate-400 hover:text-blue-500 transition-colors"
+                                className="text-slate-400 transition-colors hover:text-blue-500"
                                 tabIndex={-1}
                             >
                                 {showPass ? <EyeOffIcon /> : <EyeIcon />}
@@ -106,17 +106,20 @@ export function LoginForm() {
                         <button
                             onClick={() => router.push("/home")}
                             type="button"
-                            className="relative overflow-hidden w-full h-12 rounded-xl font-bold text-sm text-white bg-gradient-to-br from-blue-500 to-blue-800 shadow-md shadow-blue-400/35 hover:shadow-lg hover:shadow-blue-400/45 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200"
+                            className="relative h-12 w-full overflow-hidden rounded-xl bg-gradient-to-br from-blue-500 to-blue-800 text-sm font-bold text-white shadow-md shadow-blue-400/35 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-400/45 active:scale-[0.98]"
                         >
                             Entrar
-                            <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent animate-[shimmer_3s_2s_infinite]" />
+                            <span className="absolute inset-0 -translate-x-full animate-[shimmer_3s_2s_infinite] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
                         </button>
                     </div>
                 </div>
 
-                <p className={`text-center text-xs text-slate-400 mt-6 ${fadeUp(320)}`}>
+                <p className={`mt-6 text-center text-xs text-slate-400 ${fadeUp(320)}`}>
                     Não tem uma conta?{" "}
-                    <a href="/register" className="text-blue-500 font-semibold hover:text-blue-700 transition-colors">
+                    <a
+                        href="/register"
+                        className="font-semibold text-blue-500 transition-colors hover:text-blue-700"
+                    >
                         Criar conta grátis
                     </a>
                 </p>

@@ -40,20 +40,25 @@ const TOP3 = [
 export function RankingTop3() {
     return (
         <div className="mt-7">
-            <div className="flex items-center justify-between mb-3.5">
+            <div className="mb-3.5 flex items-center justify-between">
                 <h2 className="text-xl font-bold text-slate-900">Ranking Top 3</h2>
-                <a href="/ranking" className="text-xs font-bold text-blue-500 hover:text-blue-700 transition-colors">
+                <a
+                    href="/ranking"
+                    className="text-xs font-bold text-blue-500 transition-colors hover:text-blue-700"
+                >
                     Ver todos →
                 </a>
             </div>
 
-            <div className="flex flex-col divide-y divide-slate-100 bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+            <div className="flex flex-col divide-y divide-slate-100 overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm">
                 {TOP3.map((entry) => (
                     <div
                         key={entry.pos}
-                        className={`rank-row-${entry.pos} group flex items-center gap-3 px-4 py-3.5 ${entry.hoverBg} transition-colors duration-200 cursor-pointer`}
+                        className={`rank-row-${entry.pos} group flex items-center gap-3 px-4 py-3.5 ${entry.hoverBg} cursor-pointer transition-colors duration-200`}
                     >
-                        <span className={`w-6 text-sm font-bold text-center ${entry.posColor} group-hover:scale-125 transition-transform duration-200`}>
+                        <span
+                            className={`w-6 text-center text-sm font-bold ${entry.posColor} transition-transform duration-200 group-hover:scale-125`}
+                        >
                             {entry.pos}
                         </span>
 
@@ -62,17 +67,23 @@ export function RankingTop3() {
                             <img
                                 src={entry.avatar}
                                 alt={entry.name}
-                                className={`w-9 h-9 rounded-full object-cover ring-2 ${entry.ringClass} group-hover:scale-105 transition-all duration-200`}
+                                className={`h-9 w-9 rounded-full object-cover ring-2 ${entry.ringClass} transition-all duration-200 group-hover:scale-105`}
                             />
-                            <span className="absolute -bottom-0.5 -right-0.5 text-[10px] leading-none">{entry.medal}</span>
+                            <span className="absolute -right-0.5 -bottom-0.5 text-[10px] leading-none">
+                                {entry.medal}
+                            </span>
                         </div>
 
-                        <div className="flex-1 min-w-0">
-                            <p className="text-sm font-semibold text-slate-800 truncate">{entry.name}</p>
+                        <div className="min-w-0 flex-1">
+                            <p className="truncate text-sm font-semibold text-slate-800">
+                                {entry.name}
+                            </p>
                             <p className="text-xs text-slate-400">Nível {entry.level}</p>
                         </div>
 
-                        <span className={`xp-badge text-xs font-bold font-mono px-2 py-0.5 rounded-full border ${entry.xpClass}`}>
+                        <span
+                            className={`xp-badge rounded-full border px-2 py-0.5 font-mono text-xs font-bold ${entry.xpClass}`}
+                        >
                             {entry.xp}
                         </span>
                     </div>

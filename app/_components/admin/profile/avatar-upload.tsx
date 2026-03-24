@@ -1,19 +1,25 @@
 "use client"
 
-import { useState } from 'react'
-import { Button } from '@/app/_components/ui/button'
-import { type User } from '@/app/_lib/utils'
-import { CardRow } from './card-row'
+import { useState } from "react"
+import { Button } from "@/app/_components/ui/button"
+import { type User } from "@/app/_lib/utils"
+import { CardRow } from "./card-row"
 
 // Gera iniciais do nome
 function initials(name: string) {
-    return name.split(' ').slice(0, 2).map(n => n[0]).join('')
+    return name
+        .split(" ")
+        .slice(0, 2)
+        .map((n) => n[0])
+        .join("")
 }
 
 export function AvatarUpload({ user }: { user: User }) {
     const [preview, setPreview] = useState<string | null>(
         user.avatar
-            ? user.avatar.startsWith('http') ? user.avatar : `/storage/${user.avatar}`
+            ? user.avatar.startsWith("http")
+                ? user.avatar
+                : `/storage/${user.avatar}`
             : null
     )
 
@@ -24,7 +30,7 @@ export function AvatarUpload({ user }: { user: User }) {
         const url = URL.createObjectURL(file)
         setPreview(url)
         // TODO: POST /api/admin/profile/avatar (multipart/form-data)
-        e.target.value = ''
+        e.target.value = ""
     }
 
     return (
@@ -38,7 +44,7 @@ export function AvatarUpload({ user }: { user: User }) {
                         className="size-10 rounded-full object-cover ring-2 ring-slate-100"
                     />
                 ) : (
-                    <div className="size-10 rounded-full bg-blue-100 flex items-center justify-center text-sm font-bold text-blue-600">
+                    <div className="flex size-10 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-600">
                         {initials(user.name)}
                     </div>
                 )}

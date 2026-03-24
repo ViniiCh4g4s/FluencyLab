@@ -1,26 +1,21 @@
-import {HeroSection} from "@/app/_components/home/hero-section"
-import {DemoCard} from "@/app/_components/home/demo-card"
-import {CtaButtons} from "@/app/_components/home/cta-buttons"
-import {TermsFooter} from "@/app/_components/home/terms-dialog"
+import { HeroSection } from "@/app/_components/home/hero-section"
+import { DemoCard } from "@/app/_components/home/demo-card"
+import { CtaButtons } from "@/app/_components/home/cta-buttons"
+import { TermsFooter } from "@/app/_components/home/terms-dialog"
 
 export default function FluencyLabHome() {
     return (
-        <div className="min-h-screen w-full bg-blue-100 flex flex-col">
-
+        <div className="flex min-h-screen w-full flex-col bg-blue-100">
             <HeroSection />
 
-            <div className="flex-1 w-full max-w-2xl mx-auto flex flex-col
-                            px-4 sm:px-8 md:px-0
-                            pb-6 sm:pb-10">
-
+            <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col px-4 pb-6 sm:px-8 sm:pb-10 md:px-0">
                 <DemoCard />
 
-                <div className="shrink-0 h-px my-4 sm:my-5 bg-linear-to-r from-transparent via-blue-200 to-transparent" />
+                <div className="my-4 h-px shrink-0 bg-linear-to-r from-transparent via-blue-200 to-transparent sm:my-5" />
 
                 <CtaButtons />
 
                 <TermsFooter />
-
             </div>
         </div>
     )

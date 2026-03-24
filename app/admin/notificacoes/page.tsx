@@ -1,15 +1,15 @@
 "use client"
 
-import { useState } from 'react'
-import AppLayout from '@/app/_layouts/app-layout'
-import { type BreadcrumbItem } from '@/app/_lib/utils'
-import { CardContainer } from '@/app/_components/admin/profile/card-container'
-import { CardRow }       from '@/app/_components/admin/profile/card-row'
-import { Button }        from '@/app/_components/ui/button'
+import { useState } from "react"
+import AppLayout from "@/app/_layouts/app-layout"
+import { type BreadcrumbItem } from "@/app/_lib/utils"
+import { CardContainer } from "@/app/_components/admin/profile/card-container"
+import { CardRow } from "@/app/_components/admin/profile/card-row"
+import { Button } from "@/app/_components/ui/button"
 
 const breadcrumbs: BreadcrumbItem[] = [
-    { title: 'Dashboard',   href: '/admin/dashboard'    },
-    { title: 'Notificações', href: '/admin/notificacoes' },
+    { title: "Dashboard", href: "/admin/dashboard" },
+    { title: "Notificações", href: "/admin/notificacoes" },
 ]
 
 // Toggle reutilizável nesta página
@@ -18,33 +18,35 @@ function Toggle({ enabled, onChange }: { enabled: boolean; onChange: (v: boolean
         <button
             type="button"
             onClick={() => onChange(!enabled)}
-            className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors ${enabled ? 'bg-blue-600' : 'bg-slate-200'}`}
+            className={`relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors ${enabled ? "bg-blue-600" : "bg-slate-200"}`}
         >
-            <span className={`inline-block size-3.5 rounded-full bg-white shadow transition-transform ${enabled ? 'translate-x-[18px]' : 'translate-x-0.5'}`} />
+            <span
+                className={`inline-block size-3.5 rounded-full bg-white shadow transition-transform ${enabled ? "translate-x-[18px]" : "translate-x-0.5"}`}
+            />
         </button>
     )
 }
 
 export default function NotificacoesPage() {
     // E-mail
-    const [emailAtivo,    setEmailAtivo]    = useState(true)
+    const [emailAtivo, setEmailAtivo] = useState(true)
     const [emailBoasVindas, setEmailBoasVindas] = useState(true)
-    const [emailStreak,   setEmailStreak]   = useState(true)
-    const [emailRanking,  setEmailRanking]  = useState(false)
+    const [emailStreak, setEmailStreak] = useState(true)
+    const [emailRanking, setEmailRanking] = useState(false)
     const [emailConteudo, setEmailConteudo] = useState(false)
 
     // Sistema
-    const [sysManutencao,   setSysManutencao]   = useState(true)
-    const [sysSeguranca,    setSysSeguranca]    = useState(true)
-    const [sysNovoUsuario,  setSysNovoUsuario]  = useState(false)
+    const [sysManutencao, setSysManutencao] = useState(true)
+    const [sysSeguranca, setSysSeguranca] = useState(true)
+    const [sysNovoUsuario, setSysNovoUsuario] = useState(false)
 
     const [saving, setSaving] = useState(false)
-    const [saved,  setSaved]  = useState(false)
+    const [saved, setSaved] = useState(false)
 
     async function handleSave() {
         setSaving(true)
         // TODO: PATCH /api/admin/notifications
-        await new Promise(r => setTimeout(r, 800))
+        await new Promise((r) => setTimeout(r, 800))
         setSaving(false)
         setSaved(true)
         setTimeout(() => setSaved(false), 2500)
@@ -52,16 +54,17 @@ export default function NotificacoesPage() {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <div className="mx-auto max-w-5xl w-full flex flex-col gap-6 p-6 md:p-10">
-
+            <div className="mx-auto flex w-full max-w-5xl flex-col gap-6 p-6 md:p-10">
                 {/* Cabeçalho */}
                 <div className="flex items-start justify-between gap-4">
                     <div>
                         <h1 className="text-2xl font-bold text-slate-900">Notificações</h1>
-                        <p className="text-sm text-slate-400 mt-0.5">Controle quais notificações são enviadas pela plataforma.</p>
+                        <p className="mt-0.5 text-sm text-slate-400">
+                            Controle quais notificações são enviadas pela plataforma.
+                        </p>
                     </div>
                     <Button onClick={handleSave} disabled={saving} className="shrink-0">
-                        {saving ? 'Salvando…' : saved ? 'Salvo!' : 'Salvar alterações'}
+                        {saving ? "Salvando…" : saved ? "Salvo!" : "Salvar alterações"}
                     </Button>
                 </div>
 
@@ -120,7 +123,6 @@ export default function NotificacoesPage() {
                         <Toggle enabled={sysNovoUsuario} onChange={setSysNovoUsuario} />
                     </CardRow>
                 </CardContainer>
-
             </div>
         </AppLayout>
     )

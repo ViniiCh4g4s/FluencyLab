@@ -10,10 +10,7 @@ import {
 } from "@/app/_components/ui/field"
 import { Input } from "@/app/_components/ui/input"
 
-export function LoginForm({
-                              className,
-                              ...props
-                          }: React.ComponentProps<"div">) {
+export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
     return (
         <div className={cn("flex flex-col gap-6", className)} {...props}>
             <Card className="overflow-hidden p-0">
@@ -22,7 +19,7 @@ export function LoginForm({
                         <FieldGroup>
                             <div className="flex flex-col items-center gap-2 text-center">
                                 <h1 className="text-2xl font-bold">Welcome back</h1>
-                                <p className="text-balance text-muted-foreground">
+                                <p className="text-muted-foreground text-balance">
                                     Login to your Acme Inc account
                                 </p>
                             </div>
@@ -87,7 +84,7 @@ export function LoginForm({
                             </FieldDescription>
                         </FieldGroup>
                     </form>
-                    <div className="relative hidden bg-muted md:block">
+                    <div className="bg-muted relative hidden md:block">
                         <img
                             src="/placeholder.svg"
                             alt="Image"
@@ -97,8 +94,8 @@ export function LoginForm({
                 </CardContent>
             </Card>
             <FieldDescription className="px-6 text-center">
-                By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-                and <a href="#">Privacy Policy</a>.
+                By clicking continue, you agree to our <a href="#">Terms of Service</a> and{" "}
+                <a href="#">Privacy Policy</a>.
             </FieldDescription>
         </div>
     )

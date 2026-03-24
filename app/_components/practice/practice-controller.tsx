@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { type Phrase, type Feedback, scoreAnswer, generateFeedback } from "@/app/_lib/practice"
 import { XpToast } from "./xp-toast"
 import { PracticeHeader } from "./practice-header"
@@ -21,14 +21,15 @@ export function PracticeController({ phrases }: Props) {
     })
 
     // Frases filtradas pela dificuldade ativa
-    const filteredPhrases = phrases.filter(p => p.difficulty === difficulty)
+    const filteredPhrases = phrases.filter((p) => p.difficulty === difficulty)
 
     // Índice da frase atual dentro de filteredPhrases — inicializado aleatoriamente
     const [currentIndex, setCurrentIndex] = useState(() => {
-        const saved = typeof window !== "undefined"
-            ? localStorage.getItem("fluency-lab:difficulty") ?? "medium"
-            : "medium"
-        const initial = phrases.filter(p => p.difficulty === saved)
+        const saved =
+            typeof window !== "undefined"
+                ? (localStorage.getItem("fluency-lab:difficulty") ?? "medium")
+                : "medium"
+        const initial = phrases.filter((p) => p.difficulty === saved)
         return Math.floor(Math.random() * initial.length)
     })
 
@@ -40,12 +41,24 @@ export function PracticeController({ phrases }: Props) {
     const [showXpToast, setShowXpToast] = useState(false)
     // Quantidade de XP exibida no toast após verificar
     const [earnedXp, setEarnedXp] = useState(0)
-    // Lista de ids de frases favoritadas pelo usuário
-    const [favorites, setFavorites] = useState<number[]>([])
+    // Lista de ids de frases favoritadas pelo usuário — inicializada do localStorage
+    const [favorites, setFavorites] = useState<number[]>(() => {
+        if (typeof window === "undefined") return []
+        try {
+            return JSON.parse(localStorage.getItem("fluency-lab:favorites") ?? "[]")
+        } catch {
+            return []
+        }
+    })
     // Dispara a animação de pop ao favoritar (reset automático em 300ms)
     const [justFavorited, setJustFavorited] = useState(false)
     // Referência direta ao textarea para dar foco programaticamente
     const inputRef = useRef<HTMLTextAreaElement>(null)
+
+    // Sincroniza favorites com localStorage sempre que mudar
+    useEffect(() => {
+        localStorage.setItem("fluency-lab:favorites", JSON.stringify(favorites))
+    }, [favorites])
 
     // Atalhos derivados do state atual
     const phrase = filteredPhrases[currentIndex]
@@ -66,7 +79,9 @@ export function PracticeController({ phrases }: Props) {
     const handleNext = () => {
         let next
         // Garante que a próxima frase seja diferente da atual (só se houver mais de uma)
-        do { next = Math.floor(Math.random() * filteredPhrases.length) } while (next === currentIndex && filteredPhrases.length > 1)
+        do {
+            next = Math.floor(Math.random() * filteredPhrases.length)
+        } while (next === currentIndex && filteredPhrases.length > 1)
         setCurrentIndex(next)
         setAnswer("")
         setFeedback(null)
@@ -78,7 +93,7 @@ export function PracticeController({ phrases }: Props) {
     const handleChangeDifficulty = (newDifficulty: string) => {
         localStorage.setItem("fluency-lab:difficulty", newDifficulty)
         setDifficulty(newDifficulty)
-        const newFiltered = phrases.filter(p => p.difficulty === newDifficulty)
+        const newFiltered = phrases.filter((p) => p.difficulty === newDifficulty)
         setCurrentIndex(Math.floor(Math.random() * newFiltered.length))
         setAnswer("")
         setFeedback(null)
@@ -91,11 +106,11 @@ export function PracticeController({ phrases }: Props) {
             setJustFavorited(true)
             setTimeout(() => setJustFavorited(false), 300)
         }
-        setFavorites(prev => prev.includes(id) ? prev.filter(f => f !== id) : [...prev, id])
+        setFavorites((prev) => (prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id]))
     }
 
     return (
-        <div className="mx-auto bg-white px-5 pt-10 pb-28">
+        <div className="page-enter mx-auto max-w-5xl bg-white px-5 pt-10 pb-28">
             <XpToast earnedXp={earnedXp} visible={showXpToast} />
 
             <PracticeHeader
@@ -118,13 +133,7 @@ export function PracticeController({ phrases }: Props) {
                 />
             )}
 
-            {feedback && (
-                <FeedbackCard
-                    feedback={feedback}
-                    answer={answer}
-                    onNext={handleNext}
-                />
-            )}
+            {feedback && <FeedbackCard feedback={feedback} answer={answer} onNext={handleNext} />}
         </div>
     )
 }

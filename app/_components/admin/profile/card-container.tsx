@@ -8,5 +8,5 @@ export function CardContainer({ title, children }: { title: string; children: Re
                 {children}
             </div>
         </div>
-    );
+    )
 }

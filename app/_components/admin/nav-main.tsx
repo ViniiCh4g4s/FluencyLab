@@ -6,13 +6,13 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-} from '@/app/_components/ui/sidebar';
-import { type NavItem } from '@/app/_lib/utils';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+} from "@/app/_components/ui/sidebar"
+import { type NavItem } from "@/app/_lib/utils"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 export function NavMain({ items = [] }: { items: NavItem[] }) {
-    const pathname = usePathname();
+    const pathname = usePathname()
     return (
         <SidebarGroup className="px-2 py-0">
             <SidebarGroupLabel>Plataforma</SidebarGroupLabel>
@@ -33,5 +33,5 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
                 ))}
             </SidebarMenu>
         </SidebarGroup>
-    );
+    )
 }

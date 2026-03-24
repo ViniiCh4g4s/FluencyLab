@@ -3,7 +3,7 @@ import { LoginForm } from "@/app/_components/auth/login-form"
 
 export default function LoginPage() {
     return (
-        <div className="min-h-screen bg-[#f0f4ff] flex items-center justify-center px-4 relative overflow-hidden">
+        <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#f0f4ff] px-4">
             <AuthBackground />
             <LoginForm />
         </div>

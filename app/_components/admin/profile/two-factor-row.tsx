@@ -1,37 +1,52 @@
 "use client"
 
-import { useState } from 'react'
-import { Button } from '@/app/_components/ui/button'
+import { useState } from "react"
+import { Button } from "@/app/_components/ui/button"
 import {
-    Dialog, DialogClose, DialogContent, DialogDescription,
-    DialogFooter, DialogHeader, DialogTitle,
-} from '@/app/_components/ui/dialog'
-import { CardRow } from './card-row'
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from "@/app/_components/ui/dialog"
+import { CardRow } from "./card-row"
 
 // Toggle switch estilizado
-function Toggle({ enabled, onChange, disabled }: { enabled: boolean; onChange: (v: boolean) => void; disabled?: boolean }) {
+function Toggle({
+    enabled,
+    onChange,
+    disabled,
+}: {
+    enabled: boolean
+    onChange: (v: boolean) => void
+    disabled?: boolean
+}) {
     return (
         <button
             type="button"
             onClick={() => !disabled && onChange(!enabled)}
             disabled={disabled}
-            className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors disabled:opacity-50 ${enabled ? 'bg-blue-600' : 'bg-slate-200'}`}
+            className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors disabled:opacity-50 ${enabled ? "bg-blue-600" : "bg-slate-200"}`}
         >
-            <span className={`inline-block size-3.5 rounded-full bg-white shadow transition-transform ${enabled ? 'translate-x-[18px]' : 'translate-x-0.5'}`} />
+            <span
+                className={`inline-block size-3.5 rounded-full bg-white shadow transition-transform ${enabled ? "translate-x-[18px]" : "translate-x-0.5"}`}
+            />
         </button>
     )
 }
 
 export function TwoFactorRow() {
-    const [enabled,    setEnabled]    = useState(false)
-    const [setupOpen,  setSetupOpen]  = useState(false)
+    const [enabled, setEnabled] = useState(false)
+    const [setupOpen, setSetupOpen] = useState(false)
     const [disableOpen, setDisableOpen] = useState(false)
-    const [loading,    setLoading]    = useState(false)
+    const [loading, setLoading] = useState(false)
 
     async function handleEnable() {
         setLoading(true)
         // TODO: POST /api/admin/two-factor/enable
-        await new Promise(r => setTimeout(r, 600))
+        await new Promise((r) => setTimeout(r, 600))
         setLoading(false)
         setEnabled(true)
         setSetupOpen(true)
@@ -40,7 +55,7 @@ export function TwoFactorRow() {
     async function handleDisable() {
         setLoading(true)
         // TODO: DELETE /api/admin/two-factor
-        await new Promise(r => setTimeout(r, 600))
+        await new Promise((r) => setTimeout(r, 600))
         setLoading(false)
         setEnabled(false)
         setDisableOpen(false)
@@ -66,17 +81,24 @@ export function TwoFactorRow() {
                     <DialogHeader>
                         <DialogTitle>Configurar autenticação 2FA</DialogTitle>
                         <DialogDescription>
-                            Escaneie o QR code abaixo com seu aplicativo autenticador (Google Authenticator, Authy, etc.).
+                            Escaneie o QR code abaixo com seu aplicativo autenticador (Google
+                            Authenticator, Authy, etc.).
                         </DialogDescription>
                     </DialogHeader>
 
                     {/* Placeholder QR code */}
                     <div className="flex flex-col items-center gap-3 py-2">
-                        <div className="size-40 rounded-xl border-2 border-dashed border-slate-200 bg-slate-50 flex items-center justify-center">
-                            <p className="text-xs text-slate-400 text-center px-4">QR Code<br />(API necessária)</p>
+                        <div className="flex size-40 items-center justify-center rounded-xl border-2 border-dashed border-slate-200 bg-slate-50">
+                            <p className="px-4 text-center text-xs text-slate-400">
+                                QR Code
+                                <br />
+                                (API necessária)
+                            </p>
                         </div>
-                        <p className="text-xs text-slate-400">Ou insira o código manualmente no seu app</p>
-                        <code className="rounded-lg bg-slate-100 px-3 py-1.5 text-xs font-mono text-slate-700 tracking-widest">
+                        <p className="text-xs text-slate-400">
+                            Ou insira o código manualmente no seu app
+                        </p>
+                        <code className="rounded-lg bg-slate-100 px-3 py-1.5 font-mono text-xs tracking-widest text-slate-700">
                             XXXX-XXXX-XXXX-XXXX
                         </code>
                     </div>
@@ -102,7 +124,7 @@ export function TwoFactorRow() {
                             <Button variant="outline">Cancelar</Button>
                         </DialogClose>
                         <Button variant="destructive" onClick={handleDisable} disabled={loading}>
-                            {loading ? 'Desativando…' : 'Desativar 2FA'}
+                            {loading ? "Desativando…" : "Desativar 2FA"}
                         </Button>
                     </DialogFooter>
                 </DialogContent>

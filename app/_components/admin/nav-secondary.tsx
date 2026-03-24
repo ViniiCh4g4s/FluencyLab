@@ -1,6 +1,10 @@
 "use client"
 
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/app/_components/ui/collapsible';
+import {
+    Collapsible,
+    CollapsibleContent,
+    CollapsibleTrigger,
+} from "@/app/_components/ui/collapsible"
 import {
     SidebarGroup,
     SidebarMenu,
@@ -9,23 +13,23 @@ import {
     SidebarMenuSub,
     SidebarMenuSubButton,
     SidebarMenuSubItem,
-} from '@/app/_components/ui/sidebar';
-import Link from 'next/link';
-import { ChevronRight, type LucideIcon } from 'lucide-react';
+} from "@/app/_components/ui/sidebar"
+import Link from "next/link"
+import { ChevronRight, type LucideIcon } from "lucide-react"
 
 export function NavSecondary({
     items,
 }: {
     items: {
-        title: string;
-        url: string;
-        icon?: LucideIcon;
-        isActive?: boolean;
+        title: string
+        url: string
+        icon?: LucideIcon
+        isActive?: boolean
         items?: {
-            title: string;
-            url: string;
-        }[];
-    }[];
+            title: string
+            url: string
+        }[]
+    }[]
 }) {
     return (
         <SidebarGroup>
@@ -39,10 +43,7 @@ export function NavSecondary({
                     >
                         <SidebarMenuItem>
                             <CollapsibleTrigger asChild>
-                                <SidebarMenuButton
-                                    tooltip={item.title}
-                                    className="cursor-pointer"
-                                >
+                                <SidebarMenuButton tooltip={item.title} className="cursor-pointer">
                                     {item.icon && <item.icon />}
                                     <span>{item.title}</span>
                                     <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
@@ -66,5 +67,5 @@ export function NavSecondary({
                 ))}
             </SidebarMenu>
         </SidebarGroup>
-    );
+    )
 }
