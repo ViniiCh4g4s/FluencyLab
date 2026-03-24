@@ -148,3 +148,26 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ── Landing page animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(250%); }
+}
+@keyframes spinSlow    { to { transform: rotate(360deg); } }
+@keyframes spinReverse { to { transform: rotate(-360deg); } }
+
+.anim-1 { animation: fadeUp .5s   .10s ease both; }
+.anim-2 { animation: fadeUp .55s  .25s ease both; }
+.anim-3 { animation: fadeUp .6s   .38s ease both; }
+.anim-4 { animation: fadeUp .65s  .65s cubic-bezier(.34,1.3,.64,1) both; }
+.anim-5 { animation: fadeUp .55s  .95s ease both; }
+.anim-6 { animation: fadeUp .65s 1.15s cubic-bezier(.34,1.3,.64,1) both; }
+.anim-7 { animation: fadeUp .5s  1.35s ease both; }
+
+.ring-cw  { animation: spinSlow    22s linear infinite; }
+.ring-ccw { animation: spinReverse 14s linear infinite; }
