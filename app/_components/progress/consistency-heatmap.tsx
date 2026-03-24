@@ -11,9 +11,9 @@ type Props = {
 // Mapeia o nível de atividade para a classe de cor Tailwind
 function cellClass(level: number): string {
     if (level === -1) return "opacity-0 pointer-events-none"
-    if (level === 0)  return "bg-slate-100"
-    if (level === 1)  return "bg-blue-200"
-    if (level === 2)  return "bg-blue-400"
+    if (level === 0) return "bg-slate-100"
+    if (level === 1) return "bg-blue-200"
+    if (level === 2) return "bg-blue-400"
     return "bg-blue-600"
 }
 
@@ -22,15 +22,14 @@ const DAY_LABELS = ["Seg", "", "Qua", "", "Sex", "", ""]
 
 export function ConsistencyHeatmap({ weeks, currentWeekIdx }: Props) {
     return (
-        <div className="bg-slate-50 border border-slate-100 rounded-3xl p-5">
+        <div className="rounded-3xl border border-slate-100 bg-slate-50 p-5">
             <div className="flex gap-2">
-
                 {/* Labels dos dias à esquerda — fixas, fora do scroll */}
-                <div className="flex flex-col pt-5 gap-[3px] shrink-0">
+                <div className="flex shrink-0 flex-col gap-[3px] pt-5">
                     {DAY_LABELS.map((label, i) => (
                         <span
                             key={i}
-                            className="text-[10px] text-slate-300 font-medium"
+                            className="text-[10px] font-medium text-slate-300"
                             style={{ height: 14, lineHeight: "14px" }}
                         >
                             {label}
@@ -42,15 +41,15 @@ export function ConsistencyHeatmap({ weeks, currentWeekIdx }: Props) {
                 <div className="overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                     <div className="flex gap-[3px]">
                         {weeks.map((week, wi) => {
-                            const label         = monthLabelForWeek(week)
+                            const label = monthLabelForWeek(week)
                             const isCurrentWeek = wi === currentWeekIdx
 
                             return (
-                                <div key={wi} className="flex flex-col gap-[3px] shrink-0">
+                                <div key={wi} className="flex shrink-0 flex-col gap-[3px]">
                                     {/* Label do mês — ocupa espaço fixo; visível só na semana do dia 1 */}
-                                    <div className="h-4 mb-1">
+                                    <div className="mb-1 h-4">
                                         {label && (
-                                            <span className="text-[11px] text-slate-400 font-medium leading-none">
+                                            <span className="text-[11px] leading-none font-medium text-slate-400">
                                                 {label}
                                             </span>
                                         )}
@@ -60,12 +59,18 @@ export function ConsistencyHeatmap({ weeks, currentWeekIdx }: Props) {
                                     {week.map((cell, di) => (
                                         <div
                                             key={di}
-                                            title={cell.level > 0 ? `${cell.date} · nível ${cell.level}` : undefined}
+                                            title={
+                                                cell.level > 0
+                                                    ? `${cell.date} · nível ${cell.level}`
+                                                    : undefined
+                                            }
                                             className={cn(
                                                 "size-[14px] rounded-[3px]",
                                                 cellClass(cell.level),
                                                 // Sutil anel para marcar a semana atual
-                                                isCurrentWeek && cell.level === 0 && "ring-1 ring-blue-300 ring-inset"
+                                                isCurrentWeek &&
+                                                    cell.level === 0 &&
+                                                    "ring-1 ring-blue-300 ring-inset"
                                             )}
                                         />
                                     ))}
@@ -77,9 +82,9 @@ export function ConsistencyHeatmap({ weeks, currentWeekIdx }: Props) {
             </div>
 
             {/* Legenda de intensidade */}
-            <div className="flex items-center gap-1.5 mt-4 justify-end">
+            <div className="mt-4 flex items-center justify-end gap-1.5">
                 <span className="text-[11px] text-slate-400">Menos</span>
-                {[0, 1, 2, 3].map(lvl => (
+                {[0, 1, 2, 3].map((lvl) => (
                     <div key={lvl} className={cn("size-[11px] rounded-[2px]", cellClass(lvl))} />
                 ))}
                 <span className="text-[11px] text-slate-400">Mais</span>

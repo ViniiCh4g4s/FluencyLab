@@ -21,43 +21,51 @@ export function Podium({ top3 }: Props) {
                 const position = idx + 1
 
                 return (
-                    <div key={user.id} className="flex flex-col items-center flex-1">
-                        <Avatar className={cn(
-                            "border-2",
-                            isFirst
-                                ? "size-16 rounded-4xl border-blue-300 shadow-[0_4px_16px_rgba(37,99,235,0.25)]"
-                                : "size-13 rounded-[14px] border-slate-200"
-                        )}>
+                    <div key={user.id} className="flex flex-1 flex-col items-center">
+                        <Avatar
+                            className={cn(
+                                "border-2",
+                                isFirst
+                                    ? "size-16 rounded-4xl border-blue-300 shadow-[0_4px_16px_rgba(37,99,235,0.25)]"
+                                    : "size-13 rounded-[14px] border-slate-200"
+                            )}
+                        >
                             <AvatarImage
                                 src={`https://github.com/${user.github}.png`}
                                 alt={`@${user.github}`}
                             />
-                            <AvatarFallback className={cn(
-                                "rounded-none font-semibold text-sm",
-                                isFirst ? "bg-blue-600 text-white" : "bg-slate-100 text-slate-600"
-                            )}>
+                            <AvatarFallback
+                                className={cn(
+                                    "rounded-none text-sm font-semibold",
+                                    isFirst
+                                        ? "bg-blue-600 text-white"
+                                        : "bg-slate-100 text-slate-600"
+                                )}
+                            >
                                 {initials(user.name)}
                             </AvatarFallback>
                         </Avatar>
 
-                        <p className={cn(
-                            "text-[13px] font-semibold mt-2 text-center leading-tight",
-                            user.isCurrentUser ? "text-blue-600" : "text-slate-700"
-                        )}>
+                        <p
+                            className={cn(
+                                "mt-2 text-center text-[13px] leading-tight font-semibold",
+                                user.isCurrentUser ? "text-blue-600" : "text-slate-700"
+                            )}
+                        >
                             {user.name}
                         </p>
 
-                        <p className="text-[12px] font-bold text-slate-400 font-mono">
+                        <p className="font-mono text-[12px] font-bold text-slate-400">
                             {user.xp.toLocaleString()} XP
                         </p>
 
                         <div
                             style={{ height: PODIUM_HEIGHTS[idx] }}
                             className={cn(
-                                "w-full mt-2 rounded-t-xl flex items-center justify-center font-mono font-bold border border-b-0",
+                                "mt-2 flex w-full items-center justify-center rounded-t-xl border border-b-0 font-mono font-bold",
                                 isFirst
-                                    ? "bg-linear-to-b from-blue-100 to-blue-50 border-blue-200 text-blue-600 text-xl"
-                                    : "bg-slate-50 border-slate-200 text-slate-400 text-base"
+                                    ? "border-blue-200 bg-linear-to-b from-blue-100 to-blue-50 text-xl text-blue-600"
+                                    : "border-slate-200 bg-slate-50 text-base text-slate-400"
                             )}
                         >
                             {position}°
