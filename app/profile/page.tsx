@@ -3,6 +3,7 @@ import { StatsGrid } from "@/app/_components/profile/stats-grid"
 import { XpProgress } from "@/app/_components/profile/xp-progress"
 import { EditProfileDialog } from "@/app/_components/profile/edit-profile-dialog"
 import { FavoriteQuestions } from "@/app/_components/profile/favorite-questions"
+import { LogoutButton } from "@/app/_components/profile/logout-button"
 import NavLayout from "@/app/_layouts/nav-layout"
 
 const USER = {
@@ -41,6 +42,8 @@ export default function ProfilePage() {
                 />
 
                 <FavoriteQuestions />
+
+                <LogoutButton />
             </div>
         </NavLayout>
     )

@@ -18,10 +18,10 @@ const TOP3 = [
         xp: "9.350 XP",
         avatar: "https://github.com/rauchg.png",
         medal: "🥈",
-        posColor: "text-slate-400",
+        posColor: "text-slate-600",
         ringClass: "ring-slate-200 group-hover:ring-slate-400",
         hoverBg: "hover:bg-slate-50",
-        xpClass: "text-slate-500 bg-slate-50 border-slate-100",
+        xpClass: "text-slate-600 bg-slate-100 border-slate-200",
     },
     {
         pos: 3,
@@ -78,7 +78,7 @@ export function RankingTop3() {
                             <p className="truncate text-sm font-semibold text-slate-800">
                                 {entry.name}
                             </p>
-                            <p className="text-xs text-slate-400">Nível {entry.level}</p>
+                            <p className="text-xs text-slate-500">Nível {entry.level}</p>
                         </div>
 
                         <span
