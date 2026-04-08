@@ -20,7 +20,7 @@ export function StatsGrid({ stats }: Props) {
                 {stats.map((s) => (
                     <div
                         key={s.label}
-                        className="rounded-2xl border border-[#dce8ff] bg-white p-3.5 text-center shadow-[0_2px_16px_rgba(37,99,235,0.08)] transition-transform hover:-translate-y-1 sm:p-5"
+                        className="hover-lift rounded-2xl border border-[#dce8ff] bg-white p-3.5 text-center shadow-[0_2px_16px_rgba(37,99,235,0.08)] hover:bg-[#f8faff] sm:p-5"
                     >
                         <div
                             className={`mx-auto mb-2 flex h-9 w-9 items-center justify-center rounded-xl ${s.iconBg} sm:h-10 sm:w-10`}

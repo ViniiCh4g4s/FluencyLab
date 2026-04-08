@@ -303,6 +303,23 @@
     animation: fadeUp 0.25s ease both;
 }
 
+/* ─── Hover lift ──────────────────────────────────────────────────────────────
+   Aplica o efeito "pular" no hover apenas quando reduce-motion está desativado.
+   Nos botões, substitui transition-colors — as cores continuam com transição
+   porque listamos as propriedades explicitamente.
+── */
+.hover-lift {
+    transition-property: color, background-color, border-color, transform, box-shadow;
+    transition-duration: 0.15s;
+    transition-timing-function: ease;
+}
+html:not(.reduce-motion) .hover-lift:hover {
+    transform: translateY(-2px);
+}
+html:not(.reduce-motion) .hover-lift:active {
+    transform: scale(0.97);
+}
+
 
 /* ─── Tamanho de Fonte ───────────────────────────────────────────────────────
    Aumenta a fonte base de 16px para 18px. Como o Tailwind v4 gera utilitários

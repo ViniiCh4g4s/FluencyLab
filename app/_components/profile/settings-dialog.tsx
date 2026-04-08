@@ -134,7 +134,7 @@ export function SettingsDialog() {
         <>
             <button
                 onClick={() => setOpen(true)}
-                className="flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 shadow-sm transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md active:scale-95 sm:px-5 sm:py-2.5 sm:text-sm"
+                className="hover-lift flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 hover:border-slate-300 sm:px-5 sm:py-2.5 sm:text-sm"
             >
                 <Settings size={14} aria-hidden="true" />
                 Configurações
