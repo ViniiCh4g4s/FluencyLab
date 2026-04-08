@@ -11,18 +11,20 @@ function applyClass(size: FontSize) {
 }
 
 export function useFontSize() {
-    const [fontSize, setFontSize] = useState<FontSize>("normal")
+    // Lazy initializer evita setState síncrono dentro de useEffect
+    const [fontSize, setFontSize] = useState<FontSize>(() => {
+        if (typeof window === "undefined") return "normal"
+        return (localStorage.getItem(KEY) as FontSize) || "normal"
+    })
 
+    // Aplica a classe sempre que o valor mudar (inclusive na montagem)
     useEffect(() => {
-        const stored = (localStorage.getItem(KEY) as FontSize) || "normal"
-        setFontSize(stored)
-        applyClass(stored)
-    }, [])
+        applyClass(fontSize)
+    }, [fontSize])
 
     const toggle = useCallback((value: FontSize) => {
         setFontSize(value)
         localStorage.setItem(KEY, value)
-        applyClass(value)
     }, [])
 
     return { fontSize, toggle }

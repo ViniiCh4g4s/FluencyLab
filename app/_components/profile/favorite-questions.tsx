@@ -8,17 +8,18 @@ const ALL_PHRASES = FRASES.flat()
 
 export function FavoriteQuestions() {
     const [open, setOpen] = useState(false)
-    const [favoriteIds, setFavoriteIds] = useState<number[]>([])
-
-    // Lê os IDs favoritos do localStorage ao montar
-    useEffect(() => {
+    // Lazy initializer evita setState síncrono dentro de useEffect
+    const [favoriteIds, setFavoriteIds] = useState<number[]>(() => {
+        if (typeof window === "undefined") return []
         try {
             const stored = localStorage.getItem("fluency-lab:favorites")
-            if (stored) setFavoriteIds(JSON.parse(stored))
+            return stored ? JSON.parse(stored) : []
         } catch {
-            // ignora erros de parse
+            return []
         }
+    })
 
+    useEffect(() => {
         // Escuta mudanças no storage (caso outra aba atualize)
         function onStorage(e: StorageEvent) {
             if (e.key !== "fluency-lab:favorites") return

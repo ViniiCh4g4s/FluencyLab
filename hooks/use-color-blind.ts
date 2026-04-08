@@ -9,19 +9,20 @@ function applyClass(enabled: boolean) {
 }
 
 export function useColorBlind() {
-    const [enabled, setEnabled] = useState(false)
+    // Lazy initializer evita setState síncrono dentro de useEffect
+    const [enabled, setEnabled] = useState<boolean>(() => {
+        if (typeof window === "undefined") return false
+        return localStorage.getItem(KEY) === "true"
+    })
 
-    // Inicializa a partir do localStorage na montagem
+    // Aplica a classe sempre que o valor mudar (inclusive na montagem)
     useEffect(() => {
-        const stored = localStorage.getItem(KEY) === "true"
-        setEnabled(stored)
-        applyClass(stored)
-    }, [])
+        applyClass(enabled)
+    }, [enabled])
 
     const toggle = useCallback((value: boolean) => {
         setEnabled(value)
         localStorage.setItem(KEY, String(value))
-        applyClass(value)
     }, [])
 
     return { enabled, toggle }
