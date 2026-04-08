@@ -129,7 +129,6 @@ function ColorBlindPreview({ enabled }: { enabled: boolean }) {
 // ── Preview redução de movimento ─────────────────────────────────────────────
 
 function MotionPreview({ enabled }: { enabled: boolean }) {
-    const transition = enabled ? "none" : undefined
 
     return (
         <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
@@ -222,14 +221,12 @@ function MotionPreview({ enabled }: { enabled: boolean }) {
 
 // ── Etapas ──────────────────────────────────────────────────────────────────
 
-const STEPS = ["welcome", "fontSize", "sound", "colorBlind", "reduceMotion", "done"] as const
-type Step = (typeof STEPS)[number]
+type Step = "welcome" | "fontSize" | "sound" | "colorBlind" | "reduceMotion" | "done"
 const PROGRESS_STEPS: Step[] = ["fontSize", "sound", "colorBlind", "reduceMotion"]
 
 // ── Dialog principal ────────────────────────────────────────────────────────
 
 export function OnboardingDialog() {
-    const [open, setOpen] = useState(false)
     const [step, setStep] = useState<Step>("welcome")
     const [prefs, setPrefs] = useState<Prefs>({
         fontSize: "normal",
@@ -239,12 +236,13 @@ export function OnboardingDialog() {
         reduceMotion: false,
     })
 
-    useEffect(() => {
-        if (localStorage.getItem(FIRST_LOGIN_KEY) === "true") {
-            setOpen(true)
-            localStorage.removeItem(FIRST_LOGIN_KEY)
-        }
-    }, [])
+    // Lazy initializer evita setState síncrono em useEffect
+    const [open, setOpen] = useState<boolean>(() => {
+        if (typeof window === "undefined") return false
+        const isFirst = localStorage.getItem(FIRST_LOGIN_KEY) === "true"
+        if (isFirst) localStorage.removeItem(FIRST_LOGIN_KEY)
+        return isFirst
+    })
 
     function set<K extends keyof Prefs>(key: K, value: Prefs[K]) {
         setPrefs((prev) => ({ ...prev, [key]: value }))

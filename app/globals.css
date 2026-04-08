@@ -294,7 +294,7 @@
 /* ── Profile page animations ── */
 @keyframes xpFill {
     from {
-        width: 0%;
+        width: 0;
     }
 }
 
