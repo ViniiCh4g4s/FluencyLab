@@ -9,7 +9,7 @@ export function LevelCard({ level, xp, xpNeeded, streak }: Props) {
     const pct = (xp / xpNeeded) * 100
 
     return (
-        <div className="relative mb-1 overflow-hidden rounded-2xl bg-linear-to-br from-blue-600 to-blue-300 p-7 text-white shadow-xl shadow-blue-400">
+        <div className="relative mb-1 overflow-hidden rounded-2xl bg-linear-to-br from-blue-700 to-blue-600 p-7 text-white shadow-xl shadow-blue-900/40">
             {/* Orbs decorativos */}
             <div className="pointer-events-none absolute -top-14 -right-14 h-52 w-52 rounded-full bg-white/6" />
             <div className="pointer-events-none absolute right-16 -bottom-16 h-40 w-40 rounded-full bg-white/5" />
