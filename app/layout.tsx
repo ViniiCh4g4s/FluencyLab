@@ -31,7 +31,7 @@ export default function RootLayout({
             <head>
                 <script
                     dangerouslySetInnerHTML={{
-                        __html: `(function(){try{var cl=document.documentElement.classList;if(localStorage.getItem('fluency-lab:colorBlind')==='true')cl.add('colorblind');if(localStorage.getItem('fluency-lab:reduceMotion')==='true')cl.add('reduce-motion')}catch(e){}})()`,
+                        __html: `(function(){try{var cl=document.documentElement.classList;if(localStorage.getItem('fluency-lab:colorBlind')==='true')cl.add('colorblind');if(localStorage.getItem('fluency-lab:reduceMotion')==='true')cl.add('reduce-motion');if(localStorage.getItem('fluency-lab:fontSize')==='large')cl.add('font-large')}catch(e){}})()`,
                     }}
                 />
             </head>

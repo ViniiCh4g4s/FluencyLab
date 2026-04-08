@@ -5,6 +5,7 @@ import { Settings } from "lucide-react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/app/_components/ui/dialog"
 import { useColorBlind } from "@/hooks/use-color-blind"
 import { useReduceMotion } from "@/hooks/use-reduce-motion"
+import { useFontSize, type FontSize } from "@/hooks/use-font-size"
 
 type Toggle = {
     key: string
@@ -69,6 +70,33 @@ function Switch({
     )
 }
 
+function FontSizeSelector({
+    value,
+    onChange,
+}: {
+    value: FontSize
+    onChange: (v: FontSize) => void
+}) {
+    return (
+        <div className="flex shrink-0 overflow-hidden rounded-lg border border-slate-200 text-xs font-bold">
+            {(["normal", "large"] as FontSize[]).map((option) => (
+                <button
+                    key={option}
+                    type="button"
+                    onClick={() => onChange(option)}
+                    className={`px-3 py-1.5 transition-colors ${
+                        value === option
+                            ? "bg-blue-600 text-white"
+                            : "bg-white text-slate-500 hover:bg-slate-50"
+                    }`}
+                >
+                    {option === "normal" ? "Normal" : "Grande"}
+                </button>
+            ))}
+        </div>
+    )
+}
+
 export function SettingsDialog() {
     const [open, setOpen] = useState(false)
 
@@ -77,6 +105,9 @@ export function SettingsDialog() {
 
     // Redução de movimento — persistido no localStorage e aplicado globalmente
     const { enabled: reduceMotion, toggle: toggleReduceMotion } = useReduceMotion()
+
+    // Tamanho de fonte — persistido no localStorage e aplicado globalmente
+    const { fontSize, toggle: toggleFontSize } = useFontSize()
 
     // Demais toggles — in-memory por enquanto (sem efeito funcional ainda)
     const [values, setValues] = useState<Record<string, boolean>>(
@@ -119,6 +150,18 @@ export function SettingsDialog() {
                     </DialogHeader>
 
                     <div className="mt-2 flex flex-col divide-y divide-slate-100">
+                        {/* Tamanho de fonte — seletor especial */}
+                        <div className="flex items-center justify-between gap-4 py-4">
+                            <div className="min-w-0">
+                                <p className="text-sm font-semibold text-slate-800">Tamanho da fonte</p>
+                                <p className="mt-0.5 text-xs text-slate-500">
+                                    Aumenta o texto do site inteiro para facilitar a leitura.
+                                </p>
+                            </div>
+                            <FontSizeSelector value={fontSize} onChange={toggleFontSize} />
+                        </div>
+
+                        {/* Demais toggles */}
                         {SETTINGS.map((s) => (
                             <div key={s.key} className="flex items-center justify-between gap-4 py-4">
                                 <div className="min-w-0">
