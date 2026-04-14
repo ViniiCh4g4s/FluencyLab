@@ -6,6 +6,7 @@ import { PracticeCard } from "@/app/_components/home/practice-card"
 import { RankingTop3 } from "@/app/_components/home/ranking-top3"
 import { StatsCards } from "@/app/_components/progress/stats-cards"
 import { FAKE_STATS, computeStats } from "@/app/_lib/progress"
+import CursosPage from "../cursos/page"
 
 const USER = {
     name: "Marcus Vinicius",

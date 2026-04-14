@@ -43,7 +43,7 @@ export default function PlanosPage() {
                 }}
             />
 
-    <main className="max-w-3xl w-full px-4 py-12 bg-white rounded-2xl shadow">
+    <main className="max-w-3xl w-full px-4 py-12 bg-[#f8fafc] rounded-2xl shadow">
       <div className="text-center mb-10 ">
         <h1 className="text-3xl font-semibold text-gray-900">
           Escolha seu plano
