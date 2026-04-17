@@ -47,7 +47,7 @@ export function TopNav() {
                 {isGuest ? (
                     /* Modo convidado: apenas botões de login e registro */
                     <div className="flex items-center gap-2">
-                        <ProModal onClose={() => {}} />
+                        <ProModal />
                         <Button
                             variant="ghost"
                             size="sm"
