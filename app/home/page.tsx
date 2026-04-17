@@ -24,7 +24,7 @@ export default function HomePage() {
 
     return (
         <NavLayout>
-            <ProModal onClose={() => {}} />
+            <ProModal />
             <OnboardingDialog />
             <div className="page-enter relative mx-auto min-h-dvh max-w-5xl bg-white px-4 pb-24 sm:px-6 lg:px-8">
                 <WelcomeHeader name={USER.name} />
